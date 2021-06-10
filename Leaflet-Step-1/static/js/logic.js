@@ -76,14 +76,25 @@ var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   accessToken: API_KEY
 });
 
-// Define a baseMaps object to hold our base layers
+// Define a baseMaps object to hold base layers
 var baseMaps = {
   "Satellite": satellite,
   "Greyscale": lightMap,
   "Outdoors": outdoors
 };
 
-// Create overlay object to hold our overlay layer
+// Create overlay object to hold overlay layer
 var overlayMaps = {
   Earthquakes: earthquakes
 };
+
+// Create our map, giving it the streetmap and earthquakes layers 
+var myMap = L.map("map", {
+  center: [
+      37.09, -95.71
+  ],
+  zoom: 5,
+  layers: [satellite, earthquakes]
+});
+
+
