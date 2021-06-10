@@ -22,3 +22,28 @@ function chooseColor(mag) {
   else { return "green" }
 }
 
+function createFeatures(earthquakeData) { 
+  function onEachFeature(feature, layer) {
+      layer.bindPopup("Magnitude:" + feature.properties.mag + "<br>Location:" + feature.properties.place + "<br>Date:" + new Date(feature.properties.time))
+  }
+
+  var earthquakes = L.geoJSON(earthquakeData, {
+      //Create circleMarker
+      pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng);
+      },
+      style: function (feature) {
+          return {
+              fillColor: chooseColor(feature.properties.mag),
+              fillOpacity: 1,
+              weight: 1.5,
+              radius: markerSize(feature.properties.mag),
+              stroke: false
+          }
+      },
+
+      onEachFeature: onEachFeature
+  });
+
+  createMap(earthquakes);
+}
