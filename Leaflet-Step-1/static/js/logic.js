@@ -6,3 +6,9 @@ d3.json(url)
     .then(function (data) {
         createFeatures(data.features);
     });
+
+// Function to determine marker size based on magnitude.  
+function markerSize(circle) {
+  return circle * 5;
+}
+
