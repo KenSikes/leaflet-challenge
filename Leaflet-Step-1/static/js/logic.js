@@ -7,8 +7,18 @@ d3.json(url)
         createFeatures(data.features);
     });
 
-// Function to determine marker size based on magnitude.  
+// Function to determine marker size based on magnitude
 function markerSize(circle) {
   return circle * 5;
+}
+
+//Function to determine color of marker size based on magnitude
+function chooseColor(mag) {
+  if (mag > 5) { return "darkred" }
+  else if (mag > 4) { return "red" }
+  else if (mag > 3) { return "orange" }
+  else if (mag > 2) { return "yellow" }
+  else if (mag > 1) { return "limegreen" }
+  else { return "green" }
 }
 
