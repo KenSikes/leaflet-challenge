@@ -14,12 +14,12 @@ function markerSize(circle) {
 
 //Function to determine color of marker size based on magnitude
 function chooseColor(mag) {
-  if (mag > 5) { return "darkred" }
-  else if (mag > 4) { return "red" }
-  else if (mag > 3) { return "orange" }
-  else if (mag > 2) { return "yellow" }
-  else if (mag > 1) { return "limegreen" }
-  else { return "green" }
+  if (mag > 5) { return "purple" }
+  else if (mag > 4) { return "orange" }
+  else if (mag > 3) { return "yellow" }
+  else if (mag > 2) { return "blue" }
+  else if (mag > 1) { return "green" }
+  else { return "indigo" }
 }
 
 function createFeatures(earthquakeData) { 
@@ -97,4 +97,27 @@ var myMap = L.map("map", {
   layers: [satellite, earthquakes]
 });
 
+// Create a layer control pass in baseMaps and overlayMaps
+// Add layer control to map
+    L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false
+  }).addTo(myMap);
 
+  //Create Legend 
+  var legend = L.control({ position: "bottomright" });
+  console.log(L);
+  console.log(legend);
+  legend.onAdd = function () {
+      var div = L.DomUtil.create("div", "info legend");
+      var mag = [0, 1, 2, 3, 4, 5];
+
+      for (var i = 0; i < mag.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + chooseColor(mag[i] + 1) + '"></i> ' +
+              mag[i] + (mag[i + 1] ? '&ndash;' + mag[i + 1] + '<br>' : '+');
+      }
+
+      return div;
+  };
+  legend.addTo(myMap);
+}
