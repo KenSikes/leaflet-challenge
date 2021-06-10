@@ -82,3 +82,8 @@ var baseMaps = {
   "Greyscale": lightMap,
   "Outdoors": outdoors
 };
+
+// Create overlay object to hold our overlay layer
+var overlayMaps = {
+  Earthquakes: earthquakes
+};
